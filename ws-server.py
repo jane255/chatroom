@@ -83,7 +83,13 @@ def index():
         return render_template("login.html")
     else:
         # return render_template('profile.html', user=u)
-        return render_template("connect-js.html", user=u)
+        msg_list = []
+        for m in Message.all():
+            d = vars(m)
+            d['username'] = "我" if m.user_id == u.id else User.find(id=m.user_id).username
+            msg_list.append(d)
+        log("msg_list", msg_list)
+        return render_template("connect-js.html", user=u, msg_list=msg_list)
 
 
 @app.route("/register", methods=['POST'])

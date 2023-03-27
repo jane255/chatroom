@@ -13,20 +13,8 @@
         <!-- title 是浏览器显示的页面标题 -->
         <title>axe 聊天室</title>
         <style>
-            .center {
-                {#text-align: center;#}
-            }
-            .msg-list {
-                {#margin: 0 auto;#}
-                width: 500px;
-                height: 500px;
-                border: 1px solid;
-            }
-            #id-input {
-                width: 300px;
-                height: 30px;
-            }
         </style>
+        <link rel="stylesheet" href="/static/connect.css">
     </head>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
@@ -40,9 +28,25 @@
         <div class="center">
             <h1 id="id-title">axe 聊天室</h1>
             <div class="msg-list" data-user_id={{ user.id }}>
+                {% for m in msg_list %}
+                    {% if m.user_id == user.id %}
+                        <div class="msg-cell-me">
+                            <div class="msg-cell-me-username">{{m.username}}</div>
+                            <div id="msg-cell-me-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
+                                {{m.msg}}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="msg-cell-you">
+                            <div class="msg-cell-you-username">{{m.username}}</div>
+                            <div id="msg-cell-you-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
+                                {{m.msg}}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
-            <p></p>
-            <div>
+            <div class="msg-input">
                 <input id="id-input" type="text" placeholder="输入消息 按回车发送">
             </div>
         </div>

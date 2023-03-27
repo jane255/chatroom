@@ -11,9 +11,9 @@ var msgTemplate = function(msg_body) {
     var user_id = parseInt(msg_list.dataset.user_id)
     if (msg_body.user_id === user_id) {
         var t = `
-        <div class="msg-cell" style="text-align: right">
-            <div style="font-size: 15px; color: #a0abcb; padding: 5px">我</div>
-            <span class='msg' style="border-width: 5px; padding-top: 5px; padding-bottom: 5px; padding-left: 15px; padding-right: 15px;  width: 150px; height: 30px ; background-color: rgb(237 222 240);border-radius: 5px;">
+        <div class="msg-cell-me">
+            <div class="msg-cell-me-username">我</div>
+            <span id='msg-cell-me-msg' class='msg-cell-msg'  data-msg_id={{m.id}}>
                 ${msg_body.msg}
             </span>
         </div>
@@ -21,9 +21,9 @@ var msgTemplate = function(msg_body) {
         return t
     } else {
         var t = `
-        <div class="msg-cell">
-            <div style="font-size: 18px; color: #a0abcb; padding: 5px">${msg_body.username}</div>
-            <span class='msg' style="border-width: 3px ;padding-left: 15px; padding-right: 15px;  padding-top: 5px; padding-bottom: 5px; width: 150px; height: 30px ; background-color: rgb(218 245 253);border-radius: 5px;">
+        <div class="msg-cell-you">
+            <div class="msg-cell-you-username">${msg_body.username}</div>
+            <div id="msg-cell-you-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
                 ${msg_body.msg}
             </span>
         </div>
@@ -46,6 +46,7 @@ var insertMsg = function(msg_body) {
     // 插入 msg-list
     var msg_list = e('.msg-list')
     msg_list.insertAdjacentHTML('beforeend', msg_cell)
+    msg_list.scrollTop = msg_list.scrollHeight
 }
 
 
@@ -91,6 +92,8 @@ var __main = function() {
     connectSocket()
     bindInput()
     bindMsgList()
+    var msg_list = e('.msg-list')
+    msg_list.scrollTop = msg_list.scrollHeight
 }
 
 __main()

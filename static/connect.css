@@ -1,0 +1,46 @@
+.center {
+    /*#text-align: center;*/
+}
+
+.msg-list {
+    /*margin: 0 auto;*/
+    width: 500px;
+    height: 500px;
+    border: 5px solid;
+    overflow: auto;
+}
+
+#id-input {
+    width: 500px;
+    height: 100px;
+    margin-top: 5px;
+    border: 5px solid;
+    word-break:break-all;
+    overflow: auto;
+}
+
+.msg-cell-me-username, .msg-cell-you-username {
+    font-size: 15px;
+    color: #a0abcb;
+    padding: 5px;
+}
+
+.msg-cell-me, .msg-cell-you {
+    margin: 5px;
+}
+
+#msg-cell-me-msg {
+    background: rgb(237 222 240);
+}
+
+#msg-cell-you-msg {
+    background: rgb(218 245 253);
+}
+
+.msg-cell-msg {
+    border-width: 1px ;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: table;
+    word-break:break-all;
+}
