@@ -12,7 +12,7 @@
 
 #id-input {
     width: 500px;
-    height: 100px;
+    height: 40px;
     margin-top: 5px;
     border: 5px solid;
     word-break:break-all;
@@ -23,6 +23,7 @@
     font-size: 15px;
     color: #a0abcb;
     padding: 5px;
+    /*display: inline;*/
 }
 
 .msg-cell-me, .msg-cell-you {
@@ -31,6 +32,7 @@
 
 #msg-cell-me-msg {
     background: rgb(237 222 240);
+    text-align-last: start;
 }
 
 #msg-cell-you-msg {
@@ -41,6 +43,10 @@
     border-width: 1px ;
     padding: 10px 15px;
     border-radius: 5px;
-    display: table;
     word-break:break-all;
+    display: inline-block;
+}
+
+.msg-cell-me {
+   text-align: right;
 }
