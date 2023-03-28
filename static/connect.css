@@ -1,12 +1,33 @@
+.msg-box {
+    display: flex;
+}
+
+.msg-group {
+    border: 1px dashed;
+    width: 100px;
+    height: 750px;
+    display: inline-block;
+    margin: 3px;
+}
+
 .msg-body {
-    text-align: center;
+    display: inline-block;
     width: 520px;
     height: 750px;
     border: 1px dashed;
+    margin: 3px;
+}
+
+.msg-member {
+    border: 1px dashed;
+    width: 100px;
+    height: 750px;
+    display: inline-block;
+    margin: 3px;
+    background: aliceblue;
 }
 
 .msg-title {
-    text-align: center;
     margin: 5px;
 }
 
@@ -31,7 +52,7 @@
 
 #id-input {
     width: 500px;
-    height: 80px;
+    height: 90px;
     border: 1px dashed;
     word-break:break-all;
     overflow: auto;
@@ -73,4 +94,10 @@
 
 .msg-cell-you {
    text-align: left;
+}
+
+.msg-member-title {
+    text-align: center;
+    margin: 5px;
+    font-size: 16px;
 }

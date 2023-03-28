@@ -27,12 +27,14 @@
         <div class="msg-box">
 
             <!-- 消息群组-->
-            <div class="msg-group"></div>
+            <div class="msg-group">
+                abc
+            </div>
 
             <!-- 消息体 -->
             <div class="msg-body">
                 <div class="msg-title">
-                    <div id="id-title">axe 聊天室</div>
+                    <div id="id-title">尊皇讨奸</div>
                 </div>
                 <div class="msg-list" data-user_id={{ user.id }}>
                     {% for m in msg_list %}
@@ -59,7 +61,10 @@
             </div>
 
             <!-- 消息成员 -->
-            <div class="msg-member"></div>
+            <div class="msg-member">
+                <div class="msg-member-title">群成员</div>
+            </div>
+
         </div>
     </body>
     <script type="text/javascript" charset="utf-8" src="/static/connect.js" >
