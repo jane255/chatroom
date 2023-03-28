@@ -1,5 +1,14 @@
+body {
+    background: #84d6e1;
+}
+
 .msg-box {
     display: flex;
+    background: white;
+    margin: 50px;
+    padding: 30px;
+    border-radius: 30px;
+    width: 750px;
 }
 
 .msg-group {
@@ -8,14 +17,18 @@
     height: 750px;
     display: inline-block;
     margin: 3px;
+    background: aliceblue;
+    border-radius: 5px;
 }
 
 .msg-body {
+    background: white;
     display: inline-block;
     width: 520px;
     height: 750px;
     border: 1px dashed;
     margin: 3px;
+    border-radius: 5px;
 }
 
 .msg-member {
@@ -25,6 +38,7 @@
     display: inline-block;
     margin: 3px;
     background: aliceblue;
+    border-radius: 5px;
 }
 
 .msg-title {
@@ -38,10 +52,10 @@
 
 .msg-list {
     width: 500px;
-    height: 600px;
+    height: 590px;
     border: 1px dashed;
     overflow: auto;
-    background: beige;
+    background: floralwhite;
     text-align: center;
     margin: 0 auto 5px;
 }
