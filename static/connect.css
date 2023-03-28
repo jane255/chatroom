@@ -1,26 +1,40 @@
 .center {
-    /*#text-align: center;*/
+    text-align: center;
+    background: aliceblue;
+    width: 1000px;
+    height: 800px;
 }
 
 .msg-list {
-    /*margin: 0 auto;*/
+    margin: 0 auto;
     width: 500px;
-    height: 500px;
-    border: 5px solid;
+    height: 600px;
+    border: 1px dashed;
     overflow: auto;
+    background: floralwhite;
+}
+
+#id-title {
+    text-align: center;
+}
+
+.msg-input {
+    text-align: center;
+    margin: 0 auto;
 }
 
 #id-input {
     width: 500px;
-    height: 40px;
+    height: 100px;
     margin-top: 5px;
-    border: 5px solid;
+    border: 1px dashed;
     word-break:break-all;
     overflow: auto;
+    text-align: left;
 }
 
 .msg-cell-me-username, .msg-cell-you-username {
-    font-size: 15px;
+    font-size: 12px;
     color: #a0abcb;
     padding: 5px;
     /*display: inline;*/
@@ -45,8 +59,14 @@
     border-radius: 5px;
     word-break:break-all;
     display: inline-block;
+    max-width: 400px;
+    font-size: 16px;
 }
 
 .msg-cell-me {
    text-align: right;
+}
+
+.msg-cell-you {
+   text-align: left;
 }
