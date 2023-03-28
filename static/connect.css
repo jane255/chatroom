@@ -96,7 +96,7 @@
    text-align: left;
 }
 
-.msg-member-title {
+.msg-group-title, .msg-member-title {
     text-align: center;
     margin: 5px;
     font-size: 16px;
