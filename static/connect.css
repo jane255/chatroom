@@ -1,43 +1,47 @@
-.center {
+.msg-body {
     text-align: center;
-    background: aliceblue;
-    width: 1000px;
-    height: 800px;
+    width: 520px;
+    height: 750px;
+    border: 1px dashed;
+}
+
+.msg-title {
+    text-align: center;
+    margin: 5px;
+}
+
+#id-title {
+    text-align: left;
+    margin-left: 10px;
 }
 
 .msg-list {
-    margin: 0 auto;
     width: 500px;
     height: 600px;
     border: 1px dashed;
     overflow: auto;
-    background: floralwhite;
-}
-
-#id-title {
+    background: beige;
     text-align: center;
+    margin: 0 auto 5px;
 }
 
 .msg-input {
     text-align: center;
-    margin: 0 auto;
 }
 
 #id-input {
     width: 500px;
-    height: 100px;
-    margin-top: 5px;
+    height: 80px;
     border: 1px dashed;
     word-break:break-all;
     overflow: auto;
-    text-align: left;
+    font-size: 15px;
 }
 
 .msg-cell-me-username, .msg-cell-you-username {
     font-size: 12px;
     color: #a0abcb;
     padding: 5px;
-    /*display: inline;*/
 }
 
 .msg-cell-me, .msg-cell-you {

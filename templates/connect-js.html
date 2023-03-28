@@ -24,31 +24,42 @@
 
     <!-- body 中是浏览器要显示的内容 -->
     <body>
-        <!-- 实现 div 标签水平居中在屏幕中 -->
-        <div class="center">
-            <h1 id="id-title">axe 聊天室</h1>
-            <div class="msg-list" data-user_id={{ user.id }}>
-                {% for m in msg_list %}
-                    {% if m.user_id == user.id %}
-                        <div class="msg-cell-me">
-                            <div class="msg-cell-me-username">{{m.username}}</div>
-                            <div id="msg-cell-me-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
-                                {{m.msg}}
+        <div class="msg-box">
+
+            <!-- 消息群组-->
+            <div class="msg-group"></div>
+
+            <!-- 消息体 -->
+            <div class="msg-body">
+                <div class="msg-title">
+                    <div id="id-title">axe 聊天室</div>
+                </div>
+                <div class="msg-list" data-user_id={{ user.id }}>
+                    {% for m in msg_list %}
+                        {% if m.user_id == user.id %}
+                            <div class="msg-cell-me">
+                                <div class="msg-cell-me-username">{{m.username}}</div>
+                                <div id="msg-cell-me-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
+                                    {{m.msg}}
+                                </div>
                             </div>
-                        </div>
-                    {% else %}
-                        <div class="msg-cell-you">
-                            <div class="msg-cell-you-username">{{m.username}}</div>
-                            <div id="msg-cell-you-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
-                                {{m.msg}}
+                        {% else %}
+                            <div class="msg-cell-you">
+                                <div class="msg-cell-you-username">{{m.username}}</div>
+                                <div id="msg-cell-you-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
+                                    {{m.msg}}
+                                </div>
                             </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="msg-input">
+                    <textarea id="id-input" placeholder="输入消息 按回车发送"></textarea>
+                </div>
             </div>
-            <div class="msg-input">
-                <textarea id="id-input" placeholder="输入消息 按回车发送"></textarea>
-            </div>
+
+            <!-- 消息成员 -->
+            <div class="msg-member"></div>
         </div>
     </body>
     <script type="text/javascript" charset="utf-8" src="/static/connect.js" >
