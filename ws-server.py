@@ -5,7 +5,7 @@ from flask_socketio import SocketIO, emit
 
 from user import User
 from msg import Message
-from utils import log, random_str
+from utils import log, random_str, all_avatar
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'axe'
@@ -26,7 +26,7 @@ def current_user():
 def authenticated_only(f):
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
-        log("authenticated_only", session, f)
+        # log("authenticated_only", session, f)
         if current_user() is None:
             return disconnect()
         else:
@@ -80,7 +80,8 @@ def index():
     u = current_user()
     log("请求 index", u)
     if u is None:
-        return render_template("login.html")
+        avatar_list = all_avatar()
+        return render_template("login.html", avatar_list=avatar_list)
     else:
         # return render_template('profile.html', user=u)
         msg_list = []
@@ -88,7 +89,7 @@ def index():
             d = vars(m)
             d['username'] = "我" if m.user_id == u.id else User.find(id=m.user_id).username
             msg_list.append(d)
-        log("msg_list", msg_list)
+        # log("msg_list", msg_list)
         return render_template("connect-js.html", user=u, msg_list=msg_list)
 
 
@@ -102,6 +103,7 @@ def register():
 @app.route("/login", methods=['POST'])
 def login():
     form = request.form
+    log("form", form)
     u = User.validate_login(form)
     if u is None:
         return render_template("register.html")

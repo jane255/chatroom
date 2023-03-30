@@ -3,15 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>注册登录页面</title>
+    <style>
+        .class-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 3px;
+        }
+    </style>
 </head>
 <body>
     <h1>登录</h1>
-    <form action="/login" method="post">
-{#    <form id="id-login">#}
+    <form action="/login" method="post" enctype="multipart/form-data">
+
         <input type="text" name="username" placeholder="请输入用户名">
         <br>
         <input type="text" name="password" placeholder="请输入密码">
         <br>
+<!--&lt;!&ndash;        <div class="class-avatar-list">&ndash;&gt;-->
+<!--            {% for avatar in avatar_list %}-->
+<!--                <input class="class-avatar" name="avatar" type=checkbox src="/static/img/avatar/{{avatar}}">-->
+<!--&lt;!&ndash;                <img class="class-avatar" src="/static/img/avatar/{{avatar}}">&ndash;&gt;-->
+<!--            {% endfor %}-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        <br>-->
         <button type="submit">登录</button>
     </form>
 </body>
