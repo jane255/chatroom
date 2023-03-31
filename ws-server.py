@@ -1,11 +1,11 @@
 import functools
 
-from flask import Flask, request, render_template, redirect, url_for, session, make_response
+from flask import Flask, request, render_template, redirect, url_for, session
 from flask_socketio import SocketIO, emit
 
-from user import User
-from msg import Message
-from utils import log, random_str, all_avatar
+from models.user import User
+from models.msg import Message
+from utils import log, all_avatar
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'axe'
