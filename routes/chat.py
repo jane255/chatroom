@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask import render_template
+from flask_login import login_required
 
 from models.msg import Message
 from models.user import User
@@ -10,19 +11,13 @@ main = Blueprint('chat', __name__)
 
 
 @main.route('/')
+@login_required
 def index():
     # # 返回一个 templates 文件夹下的 html 页面
-    # u = current_user()
-    # log("请求 index", u)
-    # if u is None:
-    #     # avatar_list = all_avatar()
-    #     return render_template("login.html")
-    # else:
-    #     msg_list = []
-    #     for m in Message.all():
-    #         d = vars(m)
-    #         d['username'] = "我" if m.user_id == u.id else User.find(id=m.user_id).username
-    #         msg_list.append(d)
-    #     # log("msg_list", msg_list)
-    #     return render_template("chat.html", user=u, msg_list=msg_list)
-    pass
+    msg_list = []
+    for m in Message.all():
+        d = vars(m)
+        d['username'] = "我" if m.user_id == current_user.id else User.find(id=m.user_id).username
+        msg_list.append(d)
+    # log("msg_list", msg_list)
+    return render_template("chat.html", user=current_user, msg_list=msg_list)

@@ -51,7 +51,7 @@
                     {% endfor %}
                 </div>
                 <div class="msg-input">
-                    <textarea id="id-input" placeholder="输入消息 按回车发送"></textarea>
+                    <textarea id="id-input" placeholder="输入消息 按回车发送" data-action="send"></textarea>
                 </div>
             </div>
 
@@ -61,7 +61,6 @@
             </div>
 
         </div>
-    </body>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
         integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
@@ -72,7 +71,9 @@
     <script src="../static/js/api.js"></script>
     <script src="../static/js/action.js"></script>
     <!-- 业务逻辑 -->
+    <script type="text/javascript" charset="utf-8" src="/static/js/msg.js"></script>
     <script type="text/javascript" charset="utf-8" src="/static/js/chat.js"></script>
-    <script type="text/javascript" charSet="utf-8" src="/static/js/main.js"></script>
+
+    </body>
 </html>
 

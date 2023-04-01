@@ -1,7 +1,8 @@
 from models import Model
+from flask_login import UserMixin
 
 
-class User(Model):
+class User(UserMixin, Model):
     """
     User 是一个保存用户数据的 model
     现在只有两个属性 username 和 password
