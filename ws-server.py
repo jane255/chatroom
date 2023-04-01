@@ -90,7 +90,7 @@ def index():
             d['username'] = "我" if m.user_id == u.id else User.find(id=m.user_id).username
             msg_list.append(d)
         # log("msg_list", msg_list)
-        return render_template("connect-js.html", user=u, msg_list=msg_list)
+        return render_template("chat.html", user=u, msg_list=msg_list)
 
 
 @app.route("/register", methods=['POST'])
@@ -118,7 +118,7 @@ def login():
         # # 然后再用 set_cookie 来设置 cookie
         # r = make_response(template)
         # r.set_cookie('cookie_name', 'GUA')
-        return render_template("connect-js.html", user=u)
+        return render_template("chat.html", user=u)
         # return redirect(url_for('.profile'))
 
 
