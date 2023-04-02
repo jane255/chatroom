@@ -29,3 +29,9 @@ const insertMsg = (msg_body) => {
     appendHtml('.msg-list', msg_cell)
     // msg_list.scrollTop = msg_list.scrollHeight
 }
+
+const msgScrollTop = () => {
+    // 保持聊天记录为最新
+    let msg_list = e('.msg-list')
+    msg_list.scrollTop = msg_list.scrollHeight
+}

@@ -9,6 +9,7 @@ class Action extends GuaObject {
             // 当前 event 绑定的所有 action: object
             // {actionName: actionFunction}
             let actionAllEvent = self.eventActions[eventName] || {}
+            log("actionAllEvent", actionAllEvent)
             // 当前 event 绑定的所有 action 的名字
             let eventList = Object.keys(actionAllEvent)
             // 如果当前 target action 在当前 event 绑定的所有 action 中

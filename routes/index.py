@@ -7,7 +7,7 @@ from flask_login import login_user
 
 from models.user import User
 from routes import current_user, session
-from utils import log
+from utils import log, all_avatar
 
 main = Blueprint('', __name__)
 
@@ -16,18 +16,13 @@ main = Blueprint('', __name__)
 def index():
     log("初始化进入 index")
     # 返回一个 templates 文件夹下的 html 页面
-    # if current_user.is is None:
-    #     # avatar_list = all_avatar()
-    #     return render_template("login.html")
-    # current = User.find(session.get("user_id"))
-    # log("current", current)
     if current_user.is_authenticated:
-    # if current:
         log("index 验证通过 --------------")
         return redirect(url_for('chat.index'))
     else:
         log("index 验证没通过")
-        return render_template("login.html")
+        avatar_list = all_avatar()
+        return render_template("login.html", avatar_list=avatar_list)
 
 
 @main.route("/register", methods=['POST'])

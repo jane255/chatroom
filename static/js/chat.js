@@ -92,18 +92,3 @@ class ActionChat extends Action {
     }
 }
 
-const msgScrollTop = () => {
-    // 保持聊天记录为最新
-    let msg_list = e('.msg-list')
-    msg_list.scrollTop = msg_list.scrollHeight
-}
-
-const __main = function() {
-    // https://socket.io/docs/v4/client-options/#auth
-    // https://flask-socketio.readthedocs.io/en/latest/getting_started.html#connection-events
-    msgScrollTop()
-    SocketIO.bindMessageEvent()
-    ActionChat.bindEvent()
-}
-
-__main()
