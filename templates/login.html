@@ -3,59 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>注册登录页面</title>
-    <style>
-        .class-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 3px;
-        }
-    </style>
+
 </head>
 <body>
     <h1>登录</h1>
-<!--    <form action="/login" method="post" enctype="multipart/form-data">-->
+    <form action="/login" method="post">
 
-        <input type="text" name="username" placeholder="请输入用户名">
+        <input class="input-username" type="text" name="username" placeholder="请输入用户名">
         <br>
-        <input type="text" name="password" placeholder="请输入密码">
+        <input class="input-password" type="text" name="password" placeholder="请输入密码">
         <br>
-        <div class="class-avatar-list">
-            {% for avatar in avatar_list %}
-                <img class="class-avatar" src="/static/img/avatar/{{avatar}}" data-action="click">
-            {% endfor %}
-        </div>
-        <button type="submit">登录</button>
-<!--    </form>-->
-    <!-- 工具 -->
-    <script src="../static/js/utils.js"></script>
-    <script src="../static/js/api.js"></script>
-    <script src="../static/js/action.js"></script>
-    <!-- 业务逻辑 -->
-<!--    <script type="text/javascript" charset="utf-8" src="/static/js/login.js"></script>-->
-<!--    <script type="text/javascript" charset="utf-8" src="/static/js/chat.js"></script>-->
-<!--    <script type="text/javascript" charset="utf-8" src="/static/js/main.js"></script>-->
-    <script>
-        class Avatar extends GuaObject {
-            static name = 'class-avatar-list'
-            static nameSel = e(`#${this.name}`)
-            static value = ""
-
-            static setValue() {
-                let sel = Avatar.nameSel
-                log("sel", sel)
-            }
-        }
-
-        class ActionAvatar extends Action {
-            static eventActions = {
-                'click': {
-                    'click': Avatar.setValue,
-                },
-            }
-        }
-
-        ActionAvatar.bindEvent()
-
-    </script>
+        <button type="submit" class="class-login">登录</button>
+    </form>
 </body>
 </html>

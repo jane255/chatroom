@@ -21,8 +21,7 @@ def index():
         return redirect(url_for('chat.index'))
     else:
         log("index 验证没通过")
-        avatar_list = all_avatar()
-        return render_template("login.html", avatar_list=avatar_list)
+        return render_template("login.html")
 
 
 @main.route("/register", methods=['POST'])
@@ -39,7 +38,8 @@ def login():
     log("login form", form)
     u = User.validate_login(form)
     if u is None:
-        return render_template("register.html")
+        avatar_list = all_avatar()
+        return render_template("register.html", avatar_list=avatar_list)
     else:
         # session 中写入 user_id
         session['user_id'] = u.id
