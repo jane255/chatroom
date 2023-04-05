@@ -1,11 +1,9 @@
 import functools
 
-from flask_login import current_user
-from flask_socketio import disconnect
 from pydantic import BaseModel
-from flask import session
+from flask import session, render_template
 
-from utils import log
+from models.user import User
 
 
 class ResponseModel(BaseModel):
@@ -17,21 +15,20 @@ class ResponseModel(BaseModel):
     env = 'local'
 
 
-# def current_user():
-#     # 从 session 中找到 user_id 字段, 找不到就 -1
-#     # 然后 User.find_by 来用 id 找用户
-#     # 找不到就返回 None
-#     uid = session.get('user_id', -1)
-#     u = User.find_by(id=uid)
-#     return u
+def current_user():
+    # 从 session 中找到 user_id 字段, 找不到就 -1
+    # 然后 User.find_by 来用 id 找用户
+    # 找不到就返回 None
+    uid = session.get('user_id', -1)
+    u = User.find_by(id=uid)
+    return u
 
 
-def authenticated_only(f):
+def login_required(f):
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
-        if not current_user.is_authenticated:
-            log("socket 连接失败")
-            disconnect()
+        if current_user() is None:
+            return render_template("login.html")
         else:
             return f(*args, **kwargs)
 

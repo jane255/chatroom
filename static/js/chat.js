@@ -36,7 +36,7 @@ class SocketIO {
     constructor() {
         log('socketio init')
         // 这里的 /chat 就是我们在 server_socket.py 中定义的 namespace
-        return io('http://127.0.0.1:5000/chat')
+        return io('http://localhost:5000/chat')
         // return io('/chat')
     }
 

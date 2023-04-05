@@ -1,14 +1,11 @@
 from flask import Flask
 from flask_http_middleware import MiddlewareManager
-from flask_login import LoginManager
 from pydantic import ValidationError
 from werkzeug.exceptions import HTTPException
 
 import config
-from flask_session import Session
 from middlewares.metrics import MetricsMiddleware
 from middlewares.resp import RespMiddleware
-from models.user import User
 from routes import ResponseModel
 from utils import log
 
@@ -44,8 +41,6 @@ def register_error_handlers(a):
 def configured_app():
     a = Flask(__name__, template_folder=config.templates_dir, static_folder=config.static_dir)
     a.config['SECRET_KEY'] = 'secret_key'
-    a.config['SESSION_TYPE'] = 'filesystem'
-    Session(a)
 
     register_routes(a)
     register_middleware(a)
@@ -56,13 +51,4 @@ def configured_app():
 
 app = configured_app()
 # 这个文件都是套路写法
-
-
-login = LoginManager(app)
-
-
-@login.user_loader
-def load_user(id):
-    log("load_user", id)
-    return User.find(int(id))
 

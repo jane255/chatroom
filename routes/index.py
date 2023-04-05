@@ -1,27 +1,23 @@
 from flask import (
     Blueprint,
     redirect,
-    url_for, render_template, request,
+    url_for,
+    render_template,
+    request,
 )
-from flask_login import login_user
 
 from models.user import User
-from routes import current_user, session
+from routes import current_user, session, login_required
 from utils import log, all_avatar
 
 main = Blueprint('', __name__)
 
 
 @main.route('/')
+@login_required
 def index():
     log("初始化进入 index")
-    # 返回一个 templates 文件夹下的 html 页面
-    if current_user.is_authenticated:
-        log("index 验证通过 --------------")
-        return redirect(url_for('chat.index'))
-    else:
-        log("index 验证没通过")
-        return render_template("login.html")
+    return redirect(url_for('chat.index'))
 
 
 @main.route("/register", methods=['POST'])
@@ -44,10 +40,6 @@ def login():
         # session 中写入 user_id
         session['user_id'] = u.id
         session.permanent = True
-        #
-        log("登录成功", u.is_active)
-        re = login_user(u)
-        log("login_user 结果", re, current_user.id, current_user.is_active)
         #
         return redirect(url_for('chat.index'))
 
