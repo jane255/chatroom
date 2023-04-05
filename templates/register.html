@@ -34,11 +34,14 @@
         <input class="input-password" type="text" name="password" placeholder="请输入密码">
         <br>
         <input class="input-avatar" type="hidden" name="avatar">
+
+        <!-- 显示头像列表 -->
         <div class="class-avatar-list">
             {% for avatar in avatar_list %}
                 <img class="class-avatar" data-value={{avatar}} src="/static/img/avatar/{{avatar}}">
             {% endfor %}
         </div>
+
         <button type="submit">注册</button>
     </form>
 
@@ -48,7 +51,6 @@
     <script src="../static/js/action.js"></script>
 
     <script>
-
         function validateForm() {
             let username = e(".input-username").value
             let password = e(".input-password").value

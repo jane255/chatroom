@@ -17,7 +17,13 @@ def index():
     msg_list = []
     for m in Message.all():
         d = vars(m)
-        d['username'] = "我" if m.user_id == current_user.id else User.find(id=m.user_id).username
+        if m.user_id == current_user.id:
+            d['username'] = "我"
+            d['avatar'] = current_user.avatar
+        else:
+            user = User.find(id=m.user_id)
+            d['username'] = user.username
+            d['avatar'] = user.avatar
         msg_list.append(d)
     # log("msg_list", msg_list)
     return render_template("chat.html", user=current_user, msg_list=msg_list)
