@@ -35,7 +35,7 @@
                     {% for m in msg_list %}
                         {% if m.user_id == user.id %}
                             <div class="msg-cell-me">
-                                <div class="msg-cell-me-avatar">{{m.avatar}}</div>
+<!--                                <div class="msg-cell-me-avatar">{{m.avatar}}</div>-->
                                 <div class="msg-cell-me-username">{{m.username}}</div>
                                 <div id="msg-cell-me-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
                                     {{m.msg}}
@@ -43,7 +43,7 @@
                             </div>
                         {% else %}
                             <div class="msg-cell-you">
-                                <div class="msg-cell-you-avatar">{{m.avatar}}</div>
+<!--                                <div class="msg-cell-you-avatar">{{m.avatar}}</div>-->
                                 <div class="msg-cell-you-username">{{m.username}}</div>
                                 <div id="msg-cell-you-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
                                     {{m.msg}}

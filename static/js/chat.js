@@ -5,11 +5,13 @@ class Msg extends GuaObject {
         let user_id = form.user_id
         let msg = form.msg
         let msg_id = form.msg_id
+        let avatar = form.avatar
         return {
             username: username,
             user_id: user_id,
             msg: msg,
             msg_id: msg_id,
+            avatar: avatar,
         }
     }
 }

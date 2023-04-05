@@ -25,4 +25,4 @@ def index():
             d['avatar'] = user.avatar
         msg_list.append(d)
     # log("msg_list", msg_list)
-    return render_template("chat.html", user=current_user, msg_list=msg_list)
+    return render_template("chat.html", user=current, msg_list=msg_list)

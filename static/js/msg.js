@@ -26,8 +26,9 @@ const msgTemplate = (msg_body) => {
 
 const insertMsg = (msg_body) => {
     let msg_cell = msgTemplate(msg_body)
-    appendHtml('.msg-list', msg_cell)
-    // msg_list.scrollTop = msg_list.scrollHeight
+    var msg_list = e('.msg-list')
+    appendHtml(msg_list, msg_cell)
+    msg_list.scrollTop = msg_list.scrollHeight
 }
 
 const msgScrollTop = () => {
