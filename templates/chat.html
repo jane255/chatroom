@@ -20,76 +20,79 @@
     <!-- body 中是浏览器要显示的内容 -->
     <body>
         <div class="msg-box">
-
-            <!-- 消息群组-->
-            <div class="msg-group">
-                <div class="msg-group-title">群管理</div>
-
-                {% for group in group_list %}
-                    {% if group.id == 1 %}
-                    <div class="msg-group-name current-group" data-id={{group.id}}>{{group.name}}</div>
-                    {% else %}
-                    <div class="msg-group-name" data-id={{group.id}}>{{group.name}}</div>
-                    {% endif %}
-                {% endfor %}
+            <div class="group-container">
+                <button type="submit" class="button-group-add" data-action="showInput">新增群组</button>
+<!--                <textarea class="input-group-add" placeholder="请输入群组名" data-action="inputAdd"></textarea>-->
+                <input class="input-group-add" type="text" placeholder="请输入群组名">
             </div>
-
-            <!-- 消息体 -->
-            <div class="msg-body">
-                <div class="msg-title">
-                    <div id="id-title">尊皇讨奸</div>
-                </div>
-                <div class="msg-list" data-user_id={{ user.id }}>
-                    {% for m in msg_list %}
-                        {% if m.user_id == user.id %}
-                            <div class="msg-cell-me">
-                                <div class="msg-cell-body">
-                                    <div class="msg-cell-me-username">
-                                        {{m.username}}
-                                    </div>
-                                    <div id="msg-cell-me-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
-                                        {{m.msg}}
-                                    </div>
-                                </div>
-                                <div class="msg-cell-avatar">
-                                    <img class="msg-cell-avatar-img" src="/static/img/avatar/{{m.avatar}}">
-                                </div>
-                            </div>
+            <div class="msg-container">
+                <!-- 消息群组-->
+                <div class="msg-group">
+                    {% for group in group_list %}
+                        {% if group.id == 1 %}
+                        <div class="msg-group-name current-group" data-id={{group.id}}>{{group.name}}</div>
                         {% else %}
-                            <div class="msg-cell-you">
-                                <div class="msg-cell-avatar">
-                                    <img class="msg-cell-avatar-img" src="/static/img/avatar/{{m.avatar}}">
-                                </div>
-                                <div class="msg-cell-body">
-                                    <div class="msg-cell-you-username">
-                                        {{m.username}}
-                                    </div>
-                                    <div id="msg-cell-you-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
-                                        {{m.msg}}
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="msg-group-name" data-id={{group.id}}>{{group.name}}</div>
                         {% endif %}
                     {% endfor %}
                 </div>
-                <div class="msg-input">
-                    <textarea id="id-input" placeholder="输入消息 按回车发送" data-action="send"></textarea>
+
+                <!-- 消息体 -->
+                <div class="msg-body">
+                    <div class="msg-title">
+                        <div id="id-title">尊皇讨奸</div>
+                    </div>
+                    <div class="msg-list" data-user_id={{ user.id }}>
+                        {% for m in msg_list %}
+                            {% if m.user_id == user.id %}
+                                <div class="msg-cell-me">
+                                    <div class="msg-cell-body">
+                                        <div class="msg-cell-me-username">
+                                            {{m.username}}
+                                        </div>
+                                        <div id="msg-cell-me-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
+                                            {{m.msg}}
+                                        </div>
+                                    </div>
+                                    <div class="msg-cell-avatar">
+                                        <img class="msg-cell-avatar-img" src="/static/img/avatar/{{m.avatar}}">
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="msg-cell-you">
+                                    <div class="msg-cell-avatar">
+                                        <img class="msg-cell-avatar-img" src="/static/img/avatar/{{m.avatar}}">
+                                    </div>
+                                    <div class="msg-cell-body">
+                                        <div class="msg-cell-you-username">
+                                            {{m.username}}
+                                        </div>
+                                        <div id="msg-cell-you-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
+                                            {{m.msg}}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="msg-input">
+                        <textarea id="id-input" placeholder="输入消息 按回车发送" data-action="msg-send"></textarea>
+                    </div>
+                </div>
+
+                <!-- 消息成员 -->
+                <div class="msg-member">
+                    <div class="msg-member-title">群成员</div>
+                        {% for user in user_list %}
+                        <div class="msg-member-cell">
+                            <div class="msg-member-avatar">
+                                <img class="msg-member-avatar-img" src="/static/img/avatar/{{user.avatar}}">
+                            </div>
+                            <div class="msg-member-username">{{user.username}}</div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-
-            <!-- 消息成员 -->
-            <div class="msg-member">
-                <div class="msg-member-title">群成员</div>
-                    {% for user in user_list %}
-                    <div class="msg-member-cell">
-                        <div class="msg-member-avatar">
-                            <img class="msg-member-avatar-img" src="/static/img/avatar/{{user.avatar}}">
-                        </div>
-                        <div class="msg-member-username">{{user.username}}</div>
-                    </div>
-                {% endfor %}
-            </div>
-
         </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
@@ -103,7 +106,7 @@
     <!-- 业务逻辑 -->
     <script type="text/javascript" charset="utf-8" src="/static/js/msg.js"></script>
     <script type="text/javascript" charset="utf-8" src="/static/js/chat.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/static/js/login.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/static/js/group.js"></script>
     <script type="text/javascript" charset="utf-8" src="/static/js/main.js"></script>
 
     </body>

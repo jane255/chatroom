@@ -16,30 +16,11 @@ class Msg extends GuaObject {
     }
 }
 
-// class MsgContainer extends GuaObject {
-//     static container = 'id-div-msg-container'
-//     static containerSel = e(`#${this.container}`)
-//
-//     static addMsg(msg) {
-//         // 添加一个 msg 到页面中
-//         let container = this.containerSel
-//         let t = `
-//             <div class="gua-message">
-//                 <img class="gua-message-avatar" src="${msg.avatar}">
-//                 <span class="gua-message-content">${msg.username} 【说】</span>
-//                 <span class="gua-message-content">${msg.content}</span>
-//             </div>
-//         `
-//         appendHtml(container, t)
-//     }
-// }
-
 class SocketIO {
     constructor() {
         log('socketio init')
         // 这里的 /chat 就是我们在 server_socket.py 中定义的 namespace
         return io('http://localhost:5000/chat')
-        // return io('/chat')
     }
 
     static instance(...args) {
@@ -89,7 +70,7 @@ class Chat extends GuaObject {
 class ActionChat extends Action {
     static eventActions = {
         'keyup': {
-            'send': Chat.send,
+            'msg-send': Chat.send,
         },
     }
 }

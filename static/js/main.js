@@ -4,6 +4,7 @@ const __main = function() {
     msgScrollTop()
     SocketIO.bindMessageEvent()
     ActionChat.bindEvent()
+    ActionGroup.bindEvent()
 }
 
 __main()

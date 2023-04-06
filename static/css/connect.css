@@ -4,7 +4,6 @@ body {
 }
 
 .msg-box {
-    display: flex;
     background: white;
     padding: 30px;
     border-radius: 30px;
@@ -16,6 +15,26 @@ body {
     margin: auto;
 }
 
+.group-container {
+    margin-left: 3px;
+}
+
+.button-group-add {
+    background:  #c4fec5;
+}
+
+.input-group-add {
+    display: none;
+}
+
+.input-display {
+    display: inline-block;
+}
+
+.msg-container {
+    display: flex;
+}
+
 .msg-group {
     border: 1px dashed;
     width: 100px;
@@ -24,6 +43,25 @@ body {
     margin: 3px;
     background: aliceblue;
     border-radius: 5px;
+}
+
+.msg-member-title {
+    text-align: center;
+    margin: 5px;
+    font-size: 16px;
+}
+
+.msg-group-name {
+    height: 30px;
+    margin: 3px 3px 1px;
+    text-align: center;
+    border: 1px solid;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.current-group {
+    background-color: #e9e4f2;
 }
 
 .msg-body {
@@ -115,16 +153,6 @@ body {
    text-align: left;
 }
 
-.msg-group-title {
-    margin-bottom: 5px;
-}
-
-.msg-group-title, .msg-member-title {
-    text-align: center;
-    margin: 5px;
-    font-size: 16px;
-}
-
 .msg-cell-avatar-img {
     width: 30px;
     height: 30px;
@@ -139,21 +167,6 @@ body {
 
 .msg-cell-body {
     display: inline-block;
-}
-
-.msg-group-name {
-    height: 30px;
-    margin-left: 3px;
-    margin-right: 3px;
-    margin-bottom: 1px;
-    text-align: center;
-    border: 1px solid;
-    font-size: 18px;
-    border-radius: 5px;
-}
-
-.current-group {
-    background-color: #e9e4f2;
 }
 
 .msg-member-avatar, .msg-member-username {

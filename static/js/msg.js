@@ -3,10 +3,6 @@ const msgTemplate = (msg_body) => {
     let user_id = parseInt(msg_list.dataset.user_id)
 
     //
-    let m_id = msg_body.id
-    let username = msg_body.username
-    let msg = msg_body.msg
-    let avatar = msg_body.avatar
     if (msg_body.user_id === user_id) {
         let t = `
         <div class="msg-cell-me">
