@@ -1,14 +1,19 @@
 body {
     background: #84d6e1;
+    position: relative;
 }
 
 .msg-box {
     display: flex;
     background: white;
-    margin: 50px;
     padding: 30px;
     border-radius: 30px;
     width: 750px;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 .msg-group {
