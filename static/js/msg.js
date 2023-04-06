@@ -1,23 +1,43 @@
 const msgTemplate = (msg_body) => {
-    var msg_list = e('.msg-list')
-    var user_id = parseInt(msg_list.dataset.user_id)
+    let msg_list = e('.msg-list')
+    let user_id = parseInt(msg_list.dataset.user_id)
+
+    //
+    let m_id = msg_body.id
+    let username = msg_body.username
+    let msg = msg_body.msg
+    let avatar = msg_body.avatar
     if (msg_body.user_id === user_id) {
         let t = `
         <div class="msg-cell-me">
-            <div class="msg-cell-me-username">我</div>
-            <span id='msg-cell-me-msg' class='msg-cell-msg'  data-msg_id={{m.id}}>
-                ${msg_body.msg}
-            </span>
+            <div class="msg-cell-body">
+                <div class="msg-cell-me-username">
+                    我
+                </div>
+                <div id="msg-cell-me-msg" class='msg-cell-msg' data-msg_id=${msg_body.id}>
+                    ${msg_body.msg}
+                </div>
+            </div>
+            <div class="msg-cell-avatar">
+                <img class="msg-cell-avatar-img" src="/static/img/avatar/${msg_body.avatar}">
+            </div>
         </div>
     `
         return t
     } else {
         let t = `
         <div class="msg-cell-you">
-            <div class="msg-cell-you-username">${msg_body.username}</div>
-            <div id="msg-cell-you-msg" class='msg-cell-msg' data-msg_id={{m.id}}>
-                ${msg_body.msg}
-            </span>
+            <div class="msg-cell-avatar">
+                <img class="msg-cell-avatar-img" src="/static/img/avatar/${msg_body.avatar}">
+            </div>
+            <div class="msg-cell-body">
+                <div class="msg-cell-you-username">
+                    ${msg_body.username}
+                </div>
+                <div id="msg-cell-you-msg" class='msg-cell-msg' data-msg_id=${msg_body.id}>
+                    ${msg_body.msg}
+                </div>
+            </div>
         </div>
     `
         return t
