@@ -23,7 +23,15 @@
 
             <!-- 消息群组-->
             <div class="msg-group">
-                    <div class="msg-group-title">群组</div>
+                <div class="msg-group-title">群管理</div>
+
+                {% for group in group_list %}
+                    {% if group.id == 1 %}
+                    <div class="msg-group-name current-group" data-id={{group.id}}>{{group.name}}</div>
+                    {% else %}
+                    <div class="msg-group-name" data-id={{group.id}}>{{group.name}}</div>
+                    {% endif %}
+                {% endfor %}
             </div>
 
             <!-- 消息体 -->
@@ -72,6 +80,14 @@
             <!-- 消息成员 -->
             <div class="msg-member">
                 <div class="msg-member-title">群成员</div>
+                    {% for user in user_list %}
+                    <div class="msg-member-cell">
+                        <div class="msg-member-avatar">
+                            <img class="msg-member-avatar-img" src="/static/img/avatar/{{user.avatar}}">
+                        </div>
+                        <div class="msg-member-username">{{user.username}}</div>
+                    </div>
+                {% endfor %}
             </div>
 
         </div>

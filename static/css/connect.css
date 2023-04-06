@@ -1,5 +1,5 @@
 body {
-    background: #84d6e1;
+    background: #ecf6db;
     position: relative;
 }
 
@@ -60,7 +60,7 @@ body {
     height: 590px;
     border: 1px dashed;
     overflow: auto;
-    background: floralwhite;
+    background: #eff8ff;
     text-align: center;
     margin: 0 auto 5px;
 }
@@ -71,7 +71,7 @@ body {
 
 #id-input {
     width: 500px;
-    height: 90px;
+    height: 100px;
     border: 1px dashed;
     word-break:break-all;
     overflow: auto;
@@ -115,6 +115,10 @@ body {
    text-align: left;
 }
 
+.msg-group-title {
+    margin-bottom: 5px;
+}
+
 .msg-group-title, .msg-member-title {
     text-align: center;
     margin: 5px;
@@ -135,4 +139,38 @@ body {
 
 .msg-cell-body {
     display: inline-block;
+}
+
+.msg-group-name {
+    height: 30px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 1px;
+    text-align: center;
+    border: 1px solid;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.current-group {
+    background-color: #f2c1fa;
+}
+
+.msg-member-avatar, .msg-member-username {
+    display: inline-block;
+}
+
+.msg-member-avatar {
+    margin-left: 4px;
+}
+
+.msg-member-avatar-img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-bottom: -4px;
+}
+
+.msg-member-cell {
+    margin-left: 5px;
 }

@@ -14,9 +14,11 @@ def register_routes(a):
     # 注册路由函数
     from routes.index import main as index_blueprint
     from routes.chat import main as chat_blueprint
+    from routes.group import main as group_blueprint
 
     a.register_blueprint(index_blueprint, url_prefix='/')
     a.register_blueprint(chat_blueprint, url_prefix='/chat')
+    a.register_blueprint(group_blueprint, url_prefix='/group')
 
 
 def register_middleware(a):

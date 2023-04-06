@@ -4,8 +4,7 @@ from flask_socketio import join_room
 from flask_socketio import leave_room
 
 from models.msg import Message
-from routes import current_user, session, login_required
-from utils import log
+from routes import current_user, login_required
 
 
 class ChatRoomNamespace(Namespace):
