@@ -20,12 +20,12 @@ def index():
     return redirect(url_for('chat.index'))
 
 
-@main.route("/register", methods=['POST'])
+# @main.route("/register", methods=['POST'])
 def register():
     form = request.form
     log("register form", form)
     u = User.register(form)
-    return redirect(url_for('.index'))
+    # return redirect(url_for('.index'))
 
 
 @main.route("/login", methods=['POST'])
@@ -34,14 +34,12 @@ def login():
     log("login form", form)
     u = User.validate_login(form)
     if u is None:
-        avatar_list = all_avatar()
-        return render_template("login.html", avatar_list=avatar_list)
-    else:
-        # session 中写入 user_id
-        session['user_id'] = u.id
-        session.permanent = True
-        #
-        return redirect(url_for('chat.index'))
+        register()
+    # session 中写入 user_id
+    session['user_id'] = u.id
+    session.permanent = True
+    #
+    return redirect(url_for('chat.index'))
 
 
 @main.route('/profile')
