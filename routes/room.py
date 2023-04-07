@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 
 from models.room import Room
-from routes import login_required
+from routes import login_required, current_user
 from utils import log
 
 main = Blueprint('room', __name__)
@@ -19,6 +19,8 @@ def index():
 def add():
     form = request.get_json()
     log("add form", form)
+    u = current_user()
     g = Room(form)
+    g.create_user_id = u.id
     g.save()
     return dict(room_id=g.id)

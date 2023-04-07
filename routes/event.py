@@ -41,16 +41,37 @@ class ChatRoomNamespace(Namespace):
             avatar=u.avatar,
             username=u.username,
             user_id=u.id,
+            room_id=room.id,
         )
         emit('receive_join', result, room=room.name)
 
     @staticmethod
     @login_required
+    def on_leave_room(room_id):
+        print(f'离开房间:({room_id})')
+        # 断开缓存
+        u = current_user()
+        room_members_dict.leave_room(u.id)
+        # 离开房间
+        room = Room.find(room_id)
+        # 通知离线
+        form = dict(
+            user_id=u.id,
+        )
+        emit('receive_leave', form, room=room.name)
+        leave_room(room.name)
+
+    @staticmethod
+    @login_required
     def on_disconnect():
         print('客户端断开连接', )
+        # 断开缓存
         u = current_user()
         room_id = room_members_dict.leave_room(u.id)
+        # 离开房间
         room = Room.find(room_id)
+        leave_room(room.name)
+        # 通知离线
         form = dict(
             user_id=u.id,
         )
