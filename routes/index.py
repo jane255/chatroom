@@ -43,5 +43,14 @@ def login():
 
 
 @main.route('/profile')
+@login_required
 def profile():
     return render_template('profile.html', user=current_user)
+
+
+@main.route("/logout")
+@login_required
+def logout():
+    session.pop('user_id')
+    #
+    return redirect(url_for('.index'))

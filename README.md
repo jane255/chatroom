@@ -21,5 +21,7 @@ pip3 install -r requirements.txt --trusted-host pypi.douban.com -i https://pypi.
 
 
 2023-04-07
-1，优化 Model 房间命名方式
-2，去掉注册过程，简化登录流程
+- 1，优化 Model 房间命名方式
+- 2，去掉注册过程，简化登录流程
+- 3，根据 chat 页面房间 id 自动加入或离开该房间
+

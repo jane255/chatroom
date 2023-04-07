@@ -18,9 +18,16 @@ class Msg extends GuaObject {
 
 class SocketIO {
     constructor() {
-        log('socketio init')
+        log('socketio init --------------------------')
         // 这里的 /chat 就是我们在 server_socket.py 中定义的 namespace
-        return io('http://localhost:5000/chat')
+        let socket = io('http://localhost:5000/chat')
+
+        socket.on('connect', function() {
+            let room_id = e('.msg-body').dataset.id
+            log(`加入房间号(${room_id})`)
+            socket.emit("join_room", room_id)
+        })
+        return socket
     }
 
     static instance(...args) {
@@ -58,8 +65,10 @@ class Chat extends GuaObject {
         let content = input.value
         if (content.endsWith("\n")) {
             content = content.substring(0, content.length - 1)
+            let room_id = e('.msg-body').dataset.id
             let form = {
                 msg: content,
+                room_id: room_id,
             }
             SocketIO.send('send_message', form)
             input.value = ''

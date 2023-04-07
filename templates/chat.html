@@ -28,7 +28,7 @@
                 <!-- 消息群组-->
                 <div class="msg-room">
                     {% for room in room_list %}
-                        {% if room.id == 1 %}
+                        {% if room.id == current_room.id %}
                         <div class="msg-room-name current-room" data-id={{room.id}}>{{room.name}}</div>
                         {% else %}
                         <div class="msg-room-name" data-id={{room.id}}>{{room.name}}</div>
@@ -37,13 +37,13 @@
                 </div>
 
                 <!-- 消息体 -->
-                <div class="msg-body">
+                <div class="msg-body" data-id={{current_room.id}}>
                     <div class="msg-title">
-                        <div id="id-title">尊皇讨奸</div>
+                        <div id="id-title">{{current_room.name}}</div>
                     </div>
-                    <div class="msg-list" data-user_id={{ user.id }}>
+                    <div class="msg-list" data-user_id={{ current_user.id }}>
                         {% for m in msg_list %}
-                            {% if m.user_id == user.id %}
+                            {% if m.user_id == current_user.id %}
                                 <div class="msg-cell-me">
                                     <div class="msg-cell-body">
                                         <div class="msg-cell-me-username">
@@ -82,12 +82,12 @@
                 <!-- 消息成员 -->
                 <div class="msg-member">
                     <div class="msg-member-title">群成员</div>
-                        {% for user in user_list %}
+                        {% for m in member_list %}
                         <div class="msg-member-cell">
                             <div class="msg-member-avatar">
-                                <img class="msg-member-avatar-img" src="/static/img/avatar/{{user.avatar}}">
+                                <img class="msg-member-avatar-img" src="/static/img/avatar/{{m.avatar}}">
                             </div>
-                            <div class="msg-member-username">{{user.username}}</div>
+                            <div class="msg-member-username">{{m.username}}</div>
                         </div>
                     {% endfor %}
                 </div>

@@ -79,7 +79,7 @@ class Model(object):
     @classmethod
     def find_all(cls, **kwargs):
         ms = []
-        log('kwargs, ', kwargs, type(kwargs))
+        log('find_all kwargs, ', kwargs, type(kwargs))
         k, v = '', ''
         for key, value in kwargs.items():
             k, v = key, value

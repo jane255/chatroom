@@ -1,8 +1,8 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from flask import render_template
 
-from models.room import Room
 from models.msg import Message
+from models.room import Room, room_members_dict
 from models.user import User
 from routes import current_user, login_required
 
@@ -13,13 +13,14 @@ main = Blueprint('chat', __name__)
 @login_required
 def index():
     # 返回一个 templates 文件夹下的 html 页面
-    # room
+    # 获取所有房间
     room_list = Room.all()
-
+    room: Room = Room.find(request.args.get("room_id", 1))
     # msg
     msg_list = []
-    current = current_user()
-    for m in Message.all():
+    current: User = current_user()
+
+    for m in Message.find_all(room_id=room.id):
         d = vars(m)
         if m.user_id == current.id:
             d['username'] = "我"
@@ -29,14 +30,15 @@ def index():
             d['username'] = user.username
             d['avatar'] = user.avatar
         msg_list.append(d)
-    # log("msg_list", msg_list)
 
     # 用户
-    user_list = User.all()
+    # members_id = room_members_dict.members_from_room_id(room_id=room.id)
+    # member_list = [User.find(i) for i in members_id]
     return render_template(
         "chat.html",
-        user=current,
+        current_room=room,
+        current_user=current,
         room_list=room_list,
         msg_list=msg_list,
-        user_list=user_list,
+        # member_list=member_list,
     )
