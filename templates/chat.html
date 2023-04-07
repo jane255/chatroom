@@ -19,7 +19,7 @@
 
     <!-- body 中是浏览器要显示的内容 -->
     <body>
-        <div class="msg-box">
+        <div class="msg-box" data-user_id={{ current_user.id }}>
             <div class="room-container">
                 <button type="submit" class="add-room-button" data-action="showInput">新增群组</button>
                 <input class="add-room-input" type="text" placeholder="请输入群组名">
@@ -41,7 +41,7 @@
                     <div class="msg-title">
                         <div id="id-title">{{current_room.name}}</div>
                     </div>
-                    <div class="msg-list" data-user_id={{ current_user.id }}>
+                    <div class="msg-list">
                         {% for m in msg_list %}
                             {% if m.user_id == current_user.id %}
                                 <div class="msg-cell-me">
@@ -83,7 +83,7 @@
                 <div class="msg-member">
                     <div class="msg-member-title">群成员</div>
                         {% for m in member_list %}
-                        <div class="msg-member-cell">
+                        <div class="msg-member-cell" id="msg-member-cell-{{m.id}}">
                             <div class="msg-member-avatar">
                                 <img class="msg-member-avatar-img" src="/static/img/avatar/{{m.avatar}}">
                             </div>

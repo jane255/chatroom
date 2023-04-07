@@ -52,12 +52,13 @@ class RoomMembers:
 
     def members_from_room_id(self, room_id):
         room = self.room(room_id)
-        return self.room_members_dict.get(room)
+        return list(self.room_members_dict.get(room, []))
 
     def leave_room(self, user_id):
         room = self.member_for_room.pop(str(user_id))
         log(f"leave_room, user_id:{user_id}, room:{room}")
         self.room_members_dict[room].remove(user_id)
+        return int(room.split('房间')[-1])
 
 
 room_members_dict = RoomMembers()

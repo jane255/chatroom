@@ -37,13 +37,24 @@ class ChatRoomNamespace(Namespace):
         u = current_user()
         room_members_dict.add_member(room_id=room.id, user_id=u.id)
         #
+        result = dict(
+            avatar=u.avatar,
+            username=u.username,
+            user_id=u.id,
+        )
+        emit('receive_join', result, room=room.name)
 
     @staticmethod
     @login_required
     def on_disconnect():
         print('客户端断开连接', )
         u = current_user()
-        room_members_dict.leave_room(u.id)
+        room_id = room_members_dict.leave_room(u.id)
+        room = Room.find(room_id)
+        form = dict(
+            user_id=u.id,
+        )
+        emit('receive_disconnect', form, room=room.name)
 
     @staticmethod
     @login_required

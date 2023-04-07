@@ -32,13 +32,14 @@ def index():
         msg_list.append(d)
 
     # 用户
-    # members_id = room_members_dict.members_from_room_id(room_id=room.id)
-    # member_list = [User.find(i) for i in members_id]
+    member_list = [
+        User.find(i) for i in room_members_dict.members_from_room_id(room_id=room.id)
+    ]
     return render_template(
         "chat.html",
         current_room=room,
         current_user=current,
         room_list=room_list,
         msg_list=msg_list,
-        # member_list=member_list,
+        member_list=member_list,
     )

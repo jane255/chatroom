@@ -3,6 +3,8 @@ const __main = function() {
     // https://flask-socketio.readthedocs.io/en/latest/getting_started.html#connection-events
     msgScrollTop()
     SocketIO.bindMessageEvent()
+    SocketIO.bindJoinEvent()
+    SocketIO.bindDisconnectEvent()
     ActionChat.bindEvent()
     ActionRoom.bindEvent()
 }

@@ -1,5 +1,5 @@
 const msgTemplate = (msg_body) => {
-    let msg_list = e('.msg-list')
+    let msg_list = e('.msg-box')
     let user_id = parseInt(msg_list.dataset.user_id)
 
     //

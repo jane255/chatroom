@@ -16,6 +16,33 @@ class Msg extends GuaObject {
     }
 }
 
+
+const MemberTemplate = (form) => {
+    let t = `
+        <div class="msg-member-cell"  id="msg-member-cell-${form.user_id}">
+            <div class="msg-member-avatar">
+                <img class="msg-member-avatar-img" src="/static/img/avatar/${form.avatar}">
+            </div>
+            <div class="msg-member-username">${form.username}</div>
+        </div>
+    `
+    return t
+}
+
+const insertMember = (form) => {
+    let m = e(`#msg-member-cell-${form.user_id}`)
+    if (m === null) {
+        let msg_cell = MemberTemplate(form)
+        var msg_list = e('.msg-member')
+        appendHtml(msg_list, msg_cell)
+    }
+}
+
+const deleteMember = (form) => {
+    let m = e(`#msg-member-cell-${form.user_id}`)
+    m.remove()
+}
+
 class SocketIO {
     constructor() {
         log('socketio init --------------------------')
@@ -44,6 +71,26 @@ class SocketIO {
             log("receive_message", msg)
             // MsgContainer.addMsg(msg)
             insertMsg(msg)
+        })
+    }
+
+    static bindJoinEvent() {
+        let socket = this.instance()
+        // 接收服务端发送的 receive_message 事件
+        // 并且调用 MsgContainer.addMsg 来添加消息
+        socket.on('receive_join', function (resp) {
+            log("receive_join", resp)
+            insertMember(resp)
+        })
+    }
+
+    static bindDisconnectEvent() {
+        let socket = this.instance()
+        // 接收服务端发送的 receive_message 事件
+        // 并且调用 MsgContainer.addMsg 来添加消息
+        socket.on('receive_disconnect', function (resp) {
+            log("receive_disconnect", resp)
+            deleteMember(resp)
         })
     }
 
