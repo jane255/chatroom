@@ -29,7 +29,7 @@
                 <div class="msg-room">
                     {% for room in room_list %}
                         {% if room.id == current_room.id %}
-                        <div class="msg-room-name current-room" data-id={{room.id}}>{{room.name}}</div>
+                        <div class="msg-room-name current-room" data-id={{room.id}} data-action="clickRoom">{{room.name}}</div>
                         {% else %}
                         <div class="msg-room-name" data-id={{room.id}}>{{room.name}}</div>
                         {% endif %}

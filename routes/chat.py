@@ -5,6 +5,7 @@ from models.msg import Message
 from models.room import Room, room_members_dict
 from models.user import User
 from routes import current_user, login_required
+from utils import log
 
 main = Blueprint('chat', __name__)
 
@@ -40,6 +41,32 @@ def index():
         current_room=room,
         current_user=current,
         room_list=room_list,
+        msg_list=msg_list,
+        member_list=member_list,
+    )
+
+
+@main.route('/detail', methods=['POST'])
+@login_required
+def detail():
+    form = request.get_json()
+    log("detail form", form)
+    room: Room = Room.find(form.get("room_id", 1))
+    # msg
+    msg_list = []
+    for m in Message.find_all(room_id=room.id):
+        d = vars(m)
+        user = User.find(id=m.user_id)
+        d['username'] = user.username
+        d['avatar'] = user.avatar
+        msg_list.append(d)
+
+    # 用户
+    member_list = [
+        vars(User.find(i)) for i in room_members_dict.members_from_room_id(room_id=room.id)
+    ]
+    return dict(
+        room=vars(room),
         msg_list=msg_list,
         member_list=member_list,
     )

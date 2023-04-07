@@ -8,6 +8,7 @@ const __main = function() {
     SocketIO.bindDisconnectEvent()
     ActionChat.bindEvent()
     ActionRoom.bindEvent()
+    Room.clickRoom()
 }
 
 __main()
