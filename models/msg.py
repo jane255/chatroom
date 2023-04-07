@@ -9,4 +9,5 @@ class Message(Model):
     def __init__(self, form):
         self.id = form.get('id', None)
         self.msg = form.get('msg', '')
+        self.room_id = form.get('room_id', '')
         self.user_id = form.get('user_id', '')

@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from flask import session, render_template
 
 from models.user import User
+from utils import all_avatar
 
 
 class ResponseModel(BaseModel):
@@ -28,7 +29,8 @@ def login_required(f):
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
         if current_user() is None:
-            return render_template("login.html")
+            avatar_list = all_avatar()
+            return render_template("login.html", avatar_list=avatar_list)
         else:
             return f(*args, **kwargs)
 

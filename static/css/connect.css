@@ -15,15 +15,15 @@ body {
     margin: auto;
 }
 
-.group-container {
+.room-container {
     margin-left: 3px;
 }
 
-.button-group-add {
+.add-room-button {
     background:  #c4fec5;
 }
 
-.input-group-add {
+.add-room-input {
     display: none;
 }
 
@@ -35,7 +35,7 @@ body {
     display: flex;
 }
 
-.msg-group {
+.msg-room {
     border: 1px dashed;
     width: 100px;
     height: 750px;
@@ -51,7 +51,7 @@ body {
     font-size: 16px;
 }
 
-.msg-group-name {
+.msg-room-name {
     height: 30px;
     margin: 3px 3px 1px;
     text-align: center;
@@ -60,7 +60,7 @@ body {
     border-radius: 5px;
 }
 
-.current-group {
+.current-room {
     background-color: #e9e4f2;
 }
 

@@ -20,19 +20,18 @@
     <!-- body 中是浏览器要显示的内容 -->
     <body>
         <div class="msg-box">
-            <div class="group-container">
-                <button type="submit" class="button-group-add" data-action="showInput">新增群组</button>
-<!--                <textarea class="input-group-add" placeholder="请输入群组名" data-action="inputAdd"></textarea>-->
-                <input class="input-group-add" type="text" placeholder="请输入群组名">
+            <div class="room-container">
+                <button type="submit" class="add-room-button" data-action="showInput">新增群组</button>
+                <input class="add-room-input" type="text" placeholder="请输入群组名">
             </div>
             <div class="msg-container">
                 <!-- 消息群组-->
-                <div class="msg-group">
-                    {% for group in group_list %}
-                        {% if group.id == 1 %}
-                        <div class="msg-group-name current-group" data-id={{group.id}}>{{group.name}}</div>
+                <div class="msg-room">
+                    {% for room in room_list %}
+                        {% if room.id == 1 %}
+                        <div class="msg-room-name current-room" data-id={{room.id}}>{{room.name}}</div>
                         {% else %}
-                        <div class="msg-group-name" data-id={{group.id}}>{{group.name}}</div>
+                        <div class="msg-room-name" data-id={{room.id}}>{{room.name}}</div>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -106,7 +105,7 @@
     <!-- 业务逻辑 -->
     <script type="text/javascript" charset="utf-8" src="/static/js/msg.js"></script>
     <script type="text/javascript" charset="utf-8" src="/static/js/chat.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/static/js/group.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/static/js/room.js"></script>
     <script type="text/javascript" charset="utf-8" src="/static/js/main.js"></script>
 
     </body>
