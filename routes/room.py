@@ -23,4 +23,4 @@ def add():
     g = Room(form)
     g.create_user_id = u.id
     g.save()
-    return dict(room_id=g.id)
+    return dict(room_id=g.id, name=g.name)

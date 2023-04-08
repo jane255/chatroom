@@ -50,7 +50,7 @@ class SocketIO {
         socket.on('receive_join', function (resp) {
             let member = User.new(resp)
             log("receive_join", member)
-            MemberContainer.addMember(member)
+            RoomContainer.join(member)
         })
     }
 
@@ -72,7 +72,7 @@ class SocketIO {
         socket.on('receive_disconnect', function (resp) {
             let member = User.new(resp)
             log("receive_disconnect", member)
-            MemberContainer.removeMember(member)
+            RoomContainer.leave(member)
         })
     }
 
@@ -82,6 +82,13 @@ class SocketIO {
         // 在我们的使用场景中，event 就是 send_message
         let socket = this.instance()
         socket.emit(event, form)
+    }
+
+    static bindEvent() {
+        this.bindJoinEvent()
+        this.bindLeaveEvent()
+        this.bindDisconnectEvent()
+        this.bindMessageEvent()
     }
 }
 

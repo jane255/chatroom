@@ -26,3 +26,7 @@ pip3 install -r requirements.txt --trusted-host pypi.douban.com -i https://pypi.
 - 3，根据 chat 页面房间 id 自动加入或离开该房间
 - 4，自动化群成员上下线
 
+
+2023-04-08
+- 1，将 js 调整面向对象
+- 2，增加上下线通知

@@ -27,13 +27,15 @@
             <div class="msg-container">
                 <!-- 消息群组-->
                 <div class="msg-room">
-                    {% for room in room_list %}
-                        {% if room.id == current_room.id %}
-                        <div class="msg-room-name current-room" data-id={{room.id}}>{{room.name}}</div>
-                        {% else %}
-                        <div class="msg-room-name" data-id={{room.id}}>{{room.name}}</div>
-                        {% endif %}
-                    {% endfor %}
+                    <div class="msg-room-list">
+                        {% for room in room_list %}
+                            {% if room.id == current_room.id %}
+                            <div class="msg-room-name current-room div-room-{{room.id}}" data-id={{room.id}}>{{room.name}}</div>
+                            {% else %}
+                            <div class="msg-room-name div-room-{{room.id}}" data-id={{room.id}}>{{room.name}}</div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
 
                 <!-- 消息体 -->
@@ -73,6 +75,7 @@
                                 </div>
                             {% endif %}
                         {% endfor %}
+<!--                        <div class="msg-cell-notice">我上线啦</div>-->
                     </div>
                     <div class="msg-input">
                         <textarea id="id-input" placeholder="输入消息 按回车发送" data-action="msg-send"></textarea>
@@ -108,8 +111,8 @@
     <script type="text/javascript" charset="utf-8" src="/static/js/user.js"></script>
     <script type="text/javascript" charset="utf-8" src="/static/js/member.js"></script>
     <script type="text/javascript" charset="utf-8" src="/static/js/msg.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/static/js/chat.js"></script>
     <script type="text/javascript" charset="utf-8" src="/static/js/room.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/static/js/chat.js"></script>
     <script type="text/javascript" charset="utf-8" src="/static/js/main.js"></script>
 
     </body>

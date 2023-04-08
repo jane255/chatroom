@@ -57,6 +57,7 @@ class ChatRoomNamespace(Namespace):
         # 通知离线
         form = dict(
             user_id=u.id,
+            username=u.username,
         )
         emit('receive_leave', form, room=room.name)
         leave_room(room.name)
@@ -74,6 +75,7 @@ class ChatRoomNamespace(Namespace):
         # 通知离线
         form = dict(
             user_id=u.id,
+            username=u.username,
         )
         emit('receive_disconnect', form, room=room.name)
 

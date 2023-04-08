@@ -116,7 +116,7 @@ body {
     font-size: 15px;
 }
 
-.msg-cell-me-username, .msg-cell-you-username {
+.msg-cell-me-username, .msg-cell-you-username, .msg-cell-notice {
     font-size: 12px;
     color: #a0abcb;
     padding: 5px;

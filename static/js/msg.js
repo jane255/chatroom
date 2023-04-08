@@ -72,4 +72,26 @@ class MsgContainer extends GuaObject {
         let container = MsgContainer.containerSel
         container.scrollTop = container.scrollHeight
     }
+
+    static addNotice = (instance, action) => {
+        // 添加一个 msg 到页面中
+        let container = this.containerSel
+        let t = this.noticeTemplate(instance, action)
+        appendHtml(container, t)
+        //
+        this.msgScrollTop()
+    }
+
+    static noticeTemplate = (instance, action) => {
+        let n
+        if (action === RoomAction.Join) {
+            n = '进入了房间'
+        } else {
+            n = '离开了房间'
+        }
+        let t = `
+            <div class="msg-cell-notice">${instance.username} ${n}</div>
+        `
+        return t
+    }
 }
