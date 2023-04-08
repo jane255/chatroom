@@ -15,6 +15,11 @@ class RoomAction {
     static Leave = 'leave'
 }
 
+class RoomCreate {
+    static True = true
+    static False = false
+}
+
 class RoomContainer extends GuaObject {
     static container = 'msg-room-list'
     static containerSel = e(`.${this.container}`)
@@ -48,8 +53,8 @@ class RoomContainer extends GuaObject {
                     name: self.innerText
                 })
                 log("点击到了切换房间", room)
-                _this.changeCurrentRoom(room)
-                _this.enterRoom(room)
+                _this.changeCurrentRoom(room, RoomCreate.False)
+                // _this.enterRoom(room)
             }
         })
     }
@@ -63,11 +68,14 @@ class RoomContainer extends GuaObject {
             log('请求聊天消息', response)
             MsgContainer.addList(response.data.msg_list)
             MemberContainer.addList(response.data.member_list)
+            //
+            let socket = SocketIO.instance()
+            socket.emit("join_room", room.id)
         })
     }
 
     // 更改当前房间标识
-    static changeCurrentRoom = (room) => {
+    static changeCurrentRoom = (room, createRoom) => {
         let body = e('.msg-body')
         // 更改当前房间 id
         body.dataset.room_id = room.id
@@ -75,14 +83,18 @@ class RoomContainer extends GuaObject {
         // 离开原来连接的房间
         let socket = SocketIO.instance()
         socket.emit("leave_room")
-        // 加入房间
-        socket.emit("join_room", room.id)
         // 清除聊天记录和群用户
         MsgContainer.clear()
         MemberContainer.clear()
         // 更改当前聊天 title
         let title = e('#id-title')
         title.innerText = room.name
+        if (createRoom) {
+            // 加入房间
+            socket.emit("join_room", room.id)
+        } else {
+            this.enterRoom(room)
+        }
     }
 
     // 调整当前房间标识
@@ -133,7 +145,7 @@ class RoomContainer extends GuaObject {
             // // 新增群的同时、当前用户加入该群
             // // 其他用户只能在刷新页面出现新群的情况下，点击该群并加入该群
             _this.addRoom(room)
-            _this.changeCurrentRoom(room)
+            _this.changeCurrentRoom(room, RoomCreate.True)
         })
     }
 

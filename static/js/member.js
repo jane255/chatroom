@@ -4,7 +4,6 @@ class MemberContainer extends GuaObject {
 
     static addMember(instance) {
         let sel = e(`#msg-member-cell-${instance.id}`)
-        log("addMember", sel)
         if (sel === null) {
             // 添加一个 msg 到页面中
             let container = this.containerSel
@@ -38,9 +37,7 @@ class MemberContainer extends GuaObject {
 
     static addList = (array) => {
         for (let arrayElement of array) {
-            log("arrayElement", arrayElement)
             let instance = User.new(arrayElement)
-            log("instance", instance)
             this.addMember(instance)
         }
     }
