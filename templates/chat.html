@@ -29,7 +29,7 @@
                 <div class="msg-room">
                     {% for room in room_list %}
                         {% if room.id == current_room.id %}
-                        <div class="msg-room-name current-room" data-id={{room.id}} data-action="clickRoom">{{room.name}}</div>
+                        <div class="msg-room-name current-room" data-id={{room.id}}>{{room.name}}</div>
                         {% else %}
                         <div class="msg-room-name" data-id={{room.id}}>{{room.name}}</div>
                         {% endif %}
@@ -82,6 +82,7 @@
                 <!-- 消息成员 -->
                 <div class="msg-member">
                     <div class="msg-member-title">群成员</div>
+                    <div class="member-list">
                         {% for m in member_list %}
                         <div class="msg-member-cell" id="msg-member-cell-{{m.id}}">
                             <div class="msg-member-avatar">
@@ -90,6 +91,7 @@
                             <div class="msg-member-username">{{m.username}}</div>
                         </div>
                     {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -103,6 +105,8 @@
     <script src="../static/js/api.js"></script>
     <script src="../static/js/action.js"></script>
     <!-- 业务逻辑 -->
+    <script type="text/javascript" charset="utf-8" src="/static/js/user.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/static/js/member.js"></script>
     <script type="text/javascript" charset="utf-8" src="/static/js/msg.js"></script>
     <script type="text/javascript" charset="utf-8" src="/static/js/chat.js"></script>
     <script type="text/javascript" charset="utf-8" src="/static/js/room.js"></script>

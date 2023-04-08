@@ -50,7 +50,7 @@ const joinRoom = (form) => {
 
 const updateMsgList = (array) => {
     for (let arrayElement of array) {
-        insertMsg(arrayElement)
+        addMsg(arrayElement)
     }
 }
 

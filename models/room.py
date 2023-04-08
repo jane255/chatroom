@@ -37,6 +37,10 @@ class RoomMembers:
     def room(room_id):
         return f'房间{str(room_id)}'
 
+    @staticmethod
+    def parse_room_id(room):
+        return int(room.split('房间')[-1])
+
     def add_room(self, room_id):
         room = self.room(room_id)
         self.room_members_dict[room] = set()
@@ -58,7 +62,11 @@ class RoomMembers:
         room = self.member_for_room.pop(str(user_id))
         log(f"leave_room, user_id:{user_id}, room:{room}")
         self.room_members_dict[room].remove(user_id)
-        return int(room.split('房间')[-1])
+        return self.parse_room_id(room)
+
+    def room_id_from_user(self, user_id):
+        room = self.member_for_room.get(str(user_id))
+        return self.parse_room_id(room)
 
 
 room_members_dict = RoomMembers()

@@ -84,7 +84,8 @@ class ChatRoomNamespace(Namespace):
         print(f'客户端接收到消息:[{data}]')
 
         current = current_user()
-        room = Room.find(int(data.get('room_id')))
+        room_id = room_members_dict.room_id_from_user(current.id)
+        room = Room.find(room_id)
         m = Message(dict(
             user_id=current.id,
             msg=data.get('msg', ''),

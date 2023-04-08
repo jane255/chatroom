@@ -66,3 +66,7 @@ const randomAvatar = () => {
     let name = images[index]
     return `../static/img/avator/${name}`
 }
+
+const equalsInt = (int1, int2) => {
+    return parseInt(int1) === parseInt(int2)
+}
