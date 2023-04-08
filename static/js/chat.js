@@ -1,18 +1,3 @@
-// 用户离开，分两步
-// 1，如果是我离开，那么应该删除所有群成员
-// 2，如果是成员离开，那么应该是只删除该成员
-const deleteAllMember = (form) => {
-    let current_user_id = e('.msg-box').dataset.user_id
-    if (form.user_id == parseInt(current_user_id)) {
-        let msg_list = es('.msg-member-cell')
-        for (let msgListElement of msg_list) {
-            msgListElement.remove()
-        }
-    } else {
-        deleteDisconnectMember(form)
-    }
-}
-
 class SocketIO {
     constructor() {
         log('socketio init --------------------------')
@@ -61,7 +46,7 @@ class SocketIO {
         socket.on('receive_leave', function (resp) {
             let member = User.new(resp)
             log("receive_leave", member)
-            deleteAllMember(resp)
+            RoomContainer.leave(member)
         })
     }
 

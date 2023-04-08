@@ -94,4 +94,16 @@ class MsgContainer extends GuaObject {
         `
         return t
     }
+
+    static clear = () => {
+        let containerSel = this.containerSel
+        containerSel.replaceChildren()
+    }
+
+    static addList = (array) => {
+        for (let arrayElement of array) {
+            let instance = Msg.new(arrayElement)
+            this.addMsg(instance)
+        }
+    }
 }

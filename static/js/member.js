@@ -3,11 +3,14 @@ class MemberContainer extends GuaObject {
     static containerSel = e(`.${this.container}`)
 
     static addMember(instance) {
-        // 添加一个 msg 到页面中
-        let container = this.containerSel
-        let t = this.memberTemplate(instance)
-        appendHtml(container, t)
-        //
+        let sel = e(`#msg-member-cell-${instance.id}`)
+        log("addMember", sel)
+        if (sel === null) {
+            // 添加一个 msg 到页面中
+            let container = this.containerSel
+            let t = this.memberTemplate(instance)
+            appendHtml(container, t)
+        }
     }
 
     static removeMember(instance) {
@@ -26,5 +29,19 @@ class MemberContainer extends GuaObject {
             </div>
         `
         return t
+    }
+
+    static clear = () => {
+        let containerSel = this.containerSel
+        containerSel.replaceChildren()
+    }
+
+    static addList = (array) => {
+        for (let arrayElement of array) {
+            log("arrayElement", arrayElement)
+            let instance = User.new(arrayElement)
+            log("instance", instance)
+            this.addMember(instance)
+        }
     }
 }

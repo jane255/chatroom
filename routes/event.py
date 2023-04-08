@@ -29,12 +29,12 @@ class ChatRoomNamespace(Namespace):
     @staticmethod
     @login_required
     def on_join_room(room_id):
-        print(f'加入房间:({room_id})', )
+        u = current_user()
+        print(f'{u.username} 加入房间:({room_id})')
         # 加入房间
         room: Room = Room.find(int(room_id))
         join_room(room.name)
-        # 记录在线用户
-        u = current_user()
+        #
         room_members_dict.add_member(room_id=room.id, user_id=u.id)
         #
         result = dict(
@@ -47,12 +47,11 @@ class ChatRoomNamespace(Namespace):
 
     @staticmethod
     @login_required
-    def on_leave_room(room_id):
-        print(f'离开房间:({room_id})')
-        # 断开缓存
+    def on_leave_room():
         u = current_user()
-        room_members_dict.leave_room(u.id)
         # 离开房间
+        room_id = room_members_dict.leave_room(u.id)
+        print(f'({u.username})离开房间{room_id}')
         room = Room.find(room_id)
         # 通知离线
         form = dict(

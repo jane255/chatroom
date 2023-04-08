@@ -48,28 +48,41 @@ class RoomContainer extends GuaObject {
                     name: self.innerText
                 })
                 log("点击到了切换房间", room)
-                // 调整当前房间标识
                 _this.changeCurrentRoom(room)
-                // //
-                // let form = {
-                //     room_id: parseInt(room_id),
-                // }
-                // API.call(Method.Post, '/chat/detail', form, function(r){
-                //     let response = JSON.parse(r)
-                //     log('请求聊天消息', response)
-                //     updateRoom(response.data)
-                // })
+                _this.enterRoom(room)
             }
+        })
+    }
+
+    static enterRoom = (room) => {
+        let form = {
+            room_id: parseInt(room.id),
+        }
+        API.call(Method.Post, '/chat/detail', form, function(r){
+            let response = JSON.parse(r)
+            log('请求聊天消息', response)
+            MsgContainer.addList(response.data.msg_list)
+            MemberContainer.addList(response.data.member_list)
         })
     }
 
     // 更改当前房间标识
     static changeCurrentRoom = (room) => {
         let body = e('.msg-body')
-        let current_room_id = body.dataset.room_id
         // 更改当前房间 id
         body.dataset.room_id = room.id
         this.updateCurrentRoomClass(room)
+        // 离开原来连接的房间
+        let socket = SocketIO.instance()
+        socket.emit("leave_room")
+        // 加入房间
+        socket.emit("join_room", room.id)
+        // 清除聊天记录和群用户
+        MsgContainer.clear()
+        MemberContainer.clear()
+        // 更改当前聊天 title
+        let title = e('#id-title')
+        title.innerText = room.name
     }
 
     // 调整当前房间标识
@@ -121,7 +134,6 @@ class RoomContainer extends GuaObject {
             // // 其他用户只能在刷新页面出现新群的情况下，点击该群并加入该群
             _this.addRoom(room)
             _this.changeCurrentRoom(room)
-            // joinRoom(form)
         })
     }
 
@@ -131,90 +143,13 @@ class RoomContainer extends GuaObject {
     }
 
     static leave = (user) => {
-        MemberContainer.removeMember(user)
-        MsgContainer.addNotice(user, RoomAction.Leave)
+        // 自己的离线消息不用发
+        let current_user_id = e('.msg-box').dataset.user_id
+        if (! equalsInt(user.id, current_user_id)) {
+            MemberContainer.removeMember(user)
+            MsgContainer.addNotice(user, RoomAction.Leave)
+        }
     }
-}
-
-const insertRoom = (form) => {
-    // 更改当前房间标识
-    deleteCurrentRoom()
-    // let current_room = e('.current-room')
-    // current_room.className = 'msg-room-name'
-    // 插入房间标签
-    let msg_cell = roomTemplate(form)
-    var msg_list = e('.msg-room')
-    appendHtml(msg_list, msg_cell)
-}
-
-const joinRoom = (form) => {
-    // let body = e('.msg-body')
-    // let current_room_id = parseInt(body.dataset.room_id)
-    // // 更改当前房间 id
-    // body.dataset.room_id = form.room_id
-    // 离开原来的房间
-    // 1，其他人的群成员里删了我
-    // 2，我的群成员里只有我
-    let socket = SocketIO.instance()
-    socket.emit("leave_room", current_room_id)
-    // 加入房间
-    socket.emit("join_room", form.room_id)
-    // 更改当前聊天 title
-    let title = e('#id-title')
-    title.innerText = form.name
-    // 删除所有聊天记录
-    let msg_me = es('.msg-cell-me')
-    for (let msgMeKey of msg_me) {
-        msgMeKey.remove()
-    }
-    let msg_you = es('.msg-cell-you')
-    for (let msgMeKey of msg_you) {
-        msgMeKey.remove()
-    }
-}
-
-const updateMsgList = (array) => {
-    for (let arrayElement of array) {
-        addMsg(arrayElement)
-    }
-}
-
-const updateMember = (array) => {
-    for (let arrayElement of array) {
-        insertMember(arrayElement)
-    }
-}
-
-const updateRoom = (form) => {
-    let room = form.room
-
-    let body = e('.msg-body')
-    let current_room_id = parseInt(body.dataset.room_id)
-    // 更改当前房间 id
-    body.dataset.room_id = room.id
-    // 离开原来的房间
-    // 1，其他人的群成员里删了我
-    // 2，我的群成员里只有我
-    let socket = SocketIO.instance()
-    socket.emit("leave_room", current_room_id)
-    // 加入房间
-    socket.emit("join_room", room.id)
-    // 更改当前聊天 title
-    let title = e('#id-title')
-    title.innerText = room.name
-    // 删除所有聊天记录
-    let msg_me = es('.msg-cell-me')
-    for (let msgMeKey of msg_me) {
-        msgMeKey.remove()
-    }
-    let msg_you = es('.msg-cell-you')
-    for (let msgMeKey of msg_you) {
-        msgMeKey.remove()
-    }
-    // 更新聊天记录
-    updateMsgList(form.msg_list)
-    // 更新群成员
-    updateMember(form.member_list)
 }
 
 class ActionRoom extends Action {

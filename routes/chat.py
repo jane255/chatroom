@@ -62,9 +62,15 @@ def detail():
         msg_list.append(d)
 
     # 用户
-    member_list = [
-        vars(User.find(i)) for i in room_members_dict.members_from_room_id(room_id=room.id)
-    ]
+    member_list = []
+    for user_id in room_members_dict.members_from_room_id(room_id=room.id):
+        u = User.find(user_id)
+        d = dict(
+            user_id=user_id,
+            username=u.username,
+            avatar=u.avatar,
+        )
+        member_list.append(d)
     return dict(
         room=vars(room),
         msg_list=msg_list,
