@@ -66,7 +66,7 @@ class RoomContainer extends GuaObject {
         API.call(Method.Post, '/chat/detail', form, function(r){
             let response = JSON.parse(r)
             log('请求聊天消息', response)
-            MsgContainer.addList(response.data.msg_list)
+            MsgContainer.addList(response.data.msg_list, response.data.read_id)
             MemberContainer.addList(response.data.member_list)
             //
             let socket = SocketIO.instance()

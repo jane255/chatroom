@@ -25,6 +25,7 @@ class SocketIO {
             let msg = Msg.new(resp)
             log("receive_message", msg)
             MsgContainer.addMsg(msg)
+            MsgContainer.msgScrollTop()
         })
     }
 

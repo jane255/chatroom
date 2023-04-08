@@ -3,7 +3,7 @@ class Msg extends GuaObject {
         super()
         let user = User.new(form)
         let msg = form.msg
-        let id = form.msg_id
+        let id = form.id
         return {
             user: user,
             msg: msg,
@@ -95,15 +95,28 @@ class MsgContainer extends GuaObject {
         return t
     }
 
+    static addRead = () => {
+        // 添加一个 msg 到页面中
+        let container = this.containerSel
+        let t = `
+            <div class="msg-cell-notice">----- 上次读取到这里，往下滑动未读消息 -----</div>
+        `
+        appendHtml(container, t)
+    }
+
     static clear = () => {
         let containerSel = this.containerSel
         containerSel.replaceChildren()
     }
 
-    static addList = (array) => {
+    static addList = (array, read_id) => {
         for (let arrayElement of array) {
             let instance = Msg.new(arrayElement)
             this.addMsg(instance)
+            // 设置未读
+            if (equalsInt(instance.id, read_id)) {
+                this.addRead()
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ class MemberContainer extends GuaObject {
 
     static removeMember(instance) {
         let m = e(`#msg-member-cell-${instance.id}`)
+        log("removeMember", instance.id, m)
         m.remove()
         //
     }

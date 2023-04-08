@@ -1,6 +1,7 @@
 import typing as t
 
 from models import Model
+from models.msg import ReadRecord
 from utils import log
 
 
@@ -62,7 +63,10 @@ class RoomMembers:
         room = self.member_for_room.pop(str(user_id))
         log(f"leave_room, user_id:{user_id}, room:{room}")
         self.room_members_dict[room].remove(user_id)
-        return self.parse_room_id(room)
+        room_id = self.parse_room_id(room)
+        # 记录当前已读消息
+        ReadRecord.read(room_id=room_id, user_id=user_id)
+        return room_id
 
     def room_id_from_user(self, user_id):
         room = self.member_for_room.get(str(user_id))
